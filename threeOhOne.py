@@ -9,15 +9,30 @@
 "
 """
 
+import sys
 import csv
 
 class ThreeOhOne:
-    def __ini__(self):
-        pass
+    outputDir = 'outputs'
+
+    def __init__(self, filename):
+        self._process(sys.argv[1])
+
+    def _process(self, filename):
+        try:
+            fd = open(filename, 'rt')
+
+
+        except FileNotFoundError:
+            print('Error: File not found ;/')
 
 
 def main():
-    threeOhOne = ThreeOhOne()
+    if len(sys.argv) < 2:
+        print("usage: " + sys.argv[0] + " <the_file.csv>")
+        exit(1)
+    else:
+        threeOhOne = ThreeOhOne(sys.argv[1])
 
 if __name__ == "__main__":
     main()
