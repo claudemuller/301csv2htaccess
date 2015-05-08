@@ -22,9 +22,16 @@ class ThreeOhOne:
         try:
             fd = open(filename, 'rt')
 
+            fdOut = open(self.outputDir + filename + '.out.txt', 'w')
 
-        except FileNotFoundError:
-            print('Error: File not found ;/')
+
+            fd.close()
+            fdOut.close()
+        except FileNotFoundError as err:
+            print('Error: File not found ;/ ({0})'.format(err))
+        except:
+            print('Error:', sys.exc_info()[0])
+            raise
 
 
 def main():
