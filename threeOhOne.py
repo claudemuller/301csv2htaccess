@@ -13,7 +13,7 @@ import sys
 import csv
 
 class ThreeOhOne:
-    outputDir = 'outputs'
+    outputDir = 'outputs/'
 
     def __init__(self, filename):
         self._process(sys.argv[1])
@@ -21,17 +21,22 @@ class ThreeOhOne:
     def _process(self, filename):
         try:
             fd = open(filename, 'rt')
-
-            fdOut = open(self.outputDir + filename + '.out.txt', 'w')
-
-
-            fd.close()
-            fdOut.close()
         except FileNotFoundError as err:
             print('Error: File not found ;/ ({0})'.format(err))
+
+        try:
+            fdOut = open(self.outputDir + filename + '.out.txt', 'w')
+
+            reader = csv.reader(fd)
+            for row in reader:
+                print(row)
+
+            fdOut.close()
         except:
             print('Error:', sys.exc_info()[0])
             raise
+
+        fd.close()
 
 
 def main():
